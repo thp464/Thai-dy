@@ -12,8 +12,14 @@ public class UserService {
 
     private final List<User> users = new ArrayList<>();
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
+        for (User u : users) {
+            if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
+                return false; // Duplicate email
+            }
+        }
         users.add(user);
+        return true; // Successfully added
     }
 
     public List<User> getAllUsers() {
