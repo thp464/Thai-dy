@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thai-dy Simple Frontend</title>
+</head>
+<body>
+  <h1>Thai-dy</h1>
+
+  <h2>GET /</h2>
+  <button onclick="getMessage()">Get Hello Message</button>
+  <p id="helloMessage"></p>
+
+  <h2>POST /welcome</h2>
+  <form id="welcomeForm">
+    <input type="text" id="nameInput" placeholder="Enter your name" required />
+    <button type="submit">Send Welcome</button>
+  </form>
+  <p id="welcomeMessage"></p>
+
+  <script>
+    function getMessage() {
+      fetch('http://localhost:8080/')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('helloMessage').textContent = data.message;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    document.getElementById('welcomeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('nameInput').value;
+
+      fetch('http://localhost:8080/welcome', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name })
+      })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('welcomeMessage').textContent = data.message;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>
