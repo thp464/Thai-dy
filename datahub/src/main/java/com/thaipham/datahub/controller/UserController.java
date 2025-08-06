@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping
-    public Map<String, String> createUser(@RequestBody User user) {
+    public ResponseEntity<Map<String, String>> createUser(@RequestBody User user) {
         boolean added = userService.addUser(user);
 
         if (!added) {
@@ -36,7 +36,8 @@ public class UserController {
 
         return ResponseEntity.ok(Map.of(
             "message", "User " + user.getName() + " registered!",
-            "email", user.getEmail()
+            "email", user.getEmail(),
+            "id", user.getId()
         ));
     }
 

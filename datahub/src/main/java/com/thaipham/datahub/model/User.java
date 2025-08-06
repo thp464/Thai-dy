@@ -3,6 +3,7 @@ package com.thaipham.datahub.model;
 public class User {
     private String name;
     private String email;
+    private int id;
 
     public User() {}
 
@@ -25,5 +26,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+     public String getId() {
+        return name;
+    }
+
+    public void setId(String name) {
+        this.name = name;
     }
 }
